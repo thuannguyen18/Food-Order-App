@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { BsPlus } from 'react-icons/bs';
 
+import { useGlobalContext } from '../context';
+
 function Food({ name, price, description, image }) {
+    const { addToCart } = useGlobalContext();
     const [count, setCount] = useState(0);
+    
     return (
         <div className="flex items-center justify-between py-4 border-b border-b-zinc-300 last:border-none">
             <div className="flex items-center">
@@ -23,7 +27,10 @@ function Food({ name, price, description, image }) {
                         onChange={e => setCount(e.target.value)}
                     />
                 </div>
-                <button className="flex flex-end items-center justify-center bg-amber-700 text-white w-20 font-semibold rounded-xl mt-2 pr-2">
+                <button 
+                    className="flex flex-end items-center justify-center bg-amber-700 text-white w-20 font-semibold rounded-xl mt-2 pr-2" 
+                    onClick={() => addToCart(name, price, count)}
+                >
                     <BsPlus />
                     Add
                 </button>
