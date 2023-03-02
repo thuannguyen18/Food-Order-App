@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Alert from './components/Alert';
 import Banner from './components/Banner';
 import FoodList from './components/FoodList';
 import Loading from './components/Loading';
@@ -8,7 +9,7 @@ import Navbar from './components/Navbar';
 import { useGlobalContext } from './context';
 
 function App() {
-    const { loading, isModal } = useGlobalContext();
+    const { loading, modal, alert } = useGlobalContext();
 
     return (
         <div className="bg-neutral-700">
@@ -19,7 +20,8 @@ function App() {
             <div className="flex justify-center items-center">
                 {loading ? <Loading /> : <FoodList />}
             </div>
-            {isModal && <Modal />}
+            {modal && <Modal />}
+            {alert && <Alert />}
         </div>
     );
 }

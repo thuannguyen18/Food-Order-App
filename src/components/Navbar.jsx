@@ -4,7 +4,7 @@ import { BsFillCartFill } from 'react-icons/bs';
 import { useGlobalContext } from '../context';
 
 function Navbar() {
-    const { setIsModal, amount } = useGlobalContext();
+    const { openModal, amount } = useGlobalContext();
 
     return (
         <div className="bg-orange-800">
@@ -12,7 +12,7 @@ function Navbar() {
                 <h1 className="text-white text-4xl">ReactMeals</h1>
                 <button 
                     className="flex flex-wrap justify-around items-center bg-orange-900 w-40 text-white py-2 px-4 rounded-xl"
-                    onClick={() => setIsModal(true)}
+                    onClick={openModal}
                 >
                     <BsFillCartFill />
                     <p className="font-semibold text-base">Your Cart</p>

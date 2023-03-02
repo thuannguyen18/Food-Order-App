@@ -1,5 +1,13 @@
 function reducer(state, action) {
     switch (action.type) {
+        case 'OPEN_MODAL':
+            return { ...state, modal: true };
+        case 'CLOSE_MODAL':
+            return { ...state, modal: false, alert: false };
+        case 'OPEN_FORM':
+            return { ...state, form: true };
+        case 'CLOSE_FORM':
+            return { ...state, form: false };
         case 'LOADING':
             return { ...state, loading: true };
         case 'DISPLAY_FOODS':
@@ -32,9 +40,12 @@ function reducer(state, action) {
                 return cartItem;
             }).filter(cartItem => cartItem.count !== 0);
             return { ...state, carts: deCart };
+        case 'SUBMIT':
+            return { ...state, submitting: true }
+        case 'END_SUBMIT':
+            return { ...state, submitting: false, modal: false, alert: true, carts: [] };
         default: throw Error('Unknown action.');
-    }
-
-}
+    }; 
+};
 
 export default reducer;
