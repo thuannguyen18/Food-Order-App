@@ -4,13 +4,14 @@ function CartEmpty() {
     const { closeModal } = useGlobalContext();
 
     return (
-        <div>
-            <h1>The Cart is empty!</h1>
+        <div className="text-center">
+            <h4 className="text-2xl font-semibold">Your cart is empty!</h4>
+            <p className="my-2">Looks like you haven't added anything to your cart yet</p>
             <button
-                className="border rounded-xl py-px w-20 border-orange-700 text-orange-700"
+                className="border rounded p-2 w-full bg-orange-700 text-white lg:rounded-md lg:w-32 mt-4"
                 onClick={closeModal}
             >
-                Close
+                Order Now
             </button>
         </div>
     );

@@ -8,17 +8,17 @@ function Food({ name, price, description, image }) {
     const [count, setCount] = useState(0);
     
     return (
-        <div className="flex items-center justify-between py-4 border-b border-b-zinc-300 last:border-none">
-            <div className="flex items-center">
-                <img src={image} className="w-40 h-24" alt={name} />
-                <div className="ml-2">
+        <div className="lg:flex lg:items-center lg:justify-between py-4 first:pt-0 last:pb-0 border-b border-b-zinc-600 lg:border-b-zinc-400 last:border-none">
+            <div className="lg:flex lg:items-center">
+                <img src={image} className="w-full lg:w-40 lg:h-24" alt={name} />
+                <div className="lg:ml-2">
                     <h4 className="text-lg font-semibold">{name}</h4>
                     <p className="italic">{description}</p>
                     <p className="text-xl text-amber-700 font-bold">${price}</p>
                 </div>
             </div>
-            <div className="flex flex-col items-center">
-                <div className="flex">
+            <div className="mt-4 lg:flex lg:flex-col lg:items-center lg:m-0">
+                <div className="flex justify-between">
                     <span className="font-semibold text-base">Amount</span>
                     <input 
                         type="number" 
@@ -28,11 +28,11 @@ function Food({ name, price, description, image }) {
                     />
                 </div>
                 <button 
-                    className="flex flex-end items-center justify-center bg-amber-700 text-white w-20 font-semibold rounded-xl mt-2 pr-2" 
+                    className="flex flex-end items-center justify-center w-full h-10 rounded mt-3 bg-amber-700 text-white font-semibold border lg:rounded-md lg:mt-4 lg:pr-2 lg:hover:bg-white lg:hover:text-amber-700  lg:hover:border-amber-700 transition-all" 
                     onClick={() => addToCart(name, price, count)}
                 >
-                    <BsPlus />
-                    Add
+                    <BsPlus className="text-2xl" />
+                    Add To Cart
                 </button>
             </div>
         </div>

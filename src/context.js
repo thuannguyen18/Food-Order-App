@@ -46,7 +46,12 @@ function AppProvider({ children }) {
     }
 
     const addToCart = (name, price, count) => {
-        const cartItem = { id: new Date().getTime().toString(), name, price, count: +count };
+        const cartItem = {
+            id: new Date().getTime().toString(),
+            name,
+            price,
+            count: +count
+        };
         dispatch({ type: 'ADD_CART', payload: cartItem });
     };
 

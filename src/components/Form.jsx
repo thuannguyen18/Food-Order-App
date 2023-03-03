@@ -5,7 +5,7 @@ import { useGlobalContext } from '../context';
 
 function Form() {
     const { closeForm, carts, submitData } = useGlobalContext();
-    
+
     const [errors, setErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
     const [values, setValues] = useState({
@@ -78,7 +78,6 @@ function Form() {
     };
 
     useEffect(() => {
-        console.log(errors);
         if (Object.keys(errors).length === 0 && isSubmit) {
             //call API
             submitData(values);
@@ -87,18 +86,20 @@ function Form() {
 
     return (
         <form onSubmit={handleSubmit}>
-            {inputProps.map(input => (
-                <Input key={input.id} {...input} value={values[input.name]} onChange={handleChange} errors={errors} />
-            ))}
-            <div className="mt-4">
+            <div className="overflow-y-auto h-64">
+                {inputProps.map(input => (
+                    <Input key={input.id} {...input} value={values[input.name]} onChange={handleChange} errors={errors} />
+                ))}
+            </div>
+            <div className="mt-4 flex h-10">
                 <button
-                    className="border rounded-xl py-px w-20 border-orange-700 text-orange-700"
+                    className="border border-orange-700 rounded w-1/2 text-orange-700 lg:w-1/5 lg:h-9"
                     onClick={closeForm}
                 >
                     Cancel
                 </button>
                 <button
-                    className="border rounded-xl py-px w-20 bg-orange-900 text-white ml-4"
+                    className="border border-orange-700 rounded w-1/2 bg-orange-700 text-white ml-4 lg:w-1/5 lg:h-9"
                     type="submit"
                 >
                     Confirm

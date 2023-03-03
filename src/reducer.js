@@ -19,11 +19,12 @@ function reducer(state, action) {
             const { total, amount } = state.carts.reduce((cartTotal, cartItem) => {
                 const { price, count } = cartItem;
                 const total = price * count;
-                cartTotal.total += total;
+                cartTotal.total += parseFloat(total.toFixed(2));
                 cartTotal.amount += count;
+                
                 return cartTotal;
             }, { total: 0, amount: 0 });
-            return { ...state, total, count: amount };
+            return { ...state, total, amount: amount };
         case 'INCREASE':
             const inCart = state.carts.map(cartItem => {
                 if (cartItem.id === action.payload) {
@@ -43,9 +44,17 @@ function reducer(state, action) {
         case 'SUBMIT':
             return { ...state, submitting: true }
         case 'END_SUBMIT':
-            return { ...state, submitting: false, modal: false, alert: true, carts: [] };
+            return {
+                ...state,
+                form: false,
+                submitting: false,
+                modal: false,
+                alert: true,
+                carts: [],
+                amount: 0
+            };
         default: throw Error('Unknown action.');
-    }; 
+    };
 };
 
 export default reducer;
