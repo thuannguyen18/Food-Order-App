@@ -13,18 +13,28 @@ function reducer(state, action) {
         case 'DISPLAY_FOODS':
             return { ...state, loading: false, meals: action.payload };
         case 'ADD_CART':
-            if (action.payload.count < 1) return state;
-            return { ...state, carts: [...state.carts, action.payload], amount: state.amount + action.payload.count };
+            if (action.payload.count <= 0 || !Number.isInteger(action.payload.count)) return state;
+            const newCarts = state.carts.reduce((tempCarts, cartItem) => {
+                if (cartItem.name === action.payload.name) {
+                    const newCartItem = {...action.payload, count: action.payload.count + cartItem.count };
+                    const newTempCarts = tempCarts.filter((cartItem) => cartItem.name !== action.payload.name);
+                    return [...newTempCarts, newCartItem];
+                }
+                return [...tempCarts, cartItem];
+            }, [action.payload]);
+            return { ...state, carts: newCarts };
         case 'GET_TOTALS':
-            const { total, amount } = state.carts.reduce((cartTotal, cartItem) => {
+            let { total, amount } = state.carts.reduce((cartTotal, cartItem) => {
                 const { price, count } = cartItem;
                 const total = price * count;
-                cartTotal.total += parseFloat(total.toFixed(2));
+
+                cartTotal.total += total;
                 cartTotal.amount += count;
-                
+
                 return cartTotal;
             }, { total: 0, amount: 0 });
-            return { ...state, total, amount: amount };
+            total = parseFloat(total.toFixed(2));
+            return { ...state, total, amount };
         case 'INCREASE':
             const inCart = state.carts.map(cartItem => {
                 if (cartItem.id === action.payload) {

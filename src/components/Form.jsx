@@ -6,8 +6,8 @@ import { useGlobalContext } from '../context';
 function Form() {
     const { closeForm, carts, submitData } = useGlobalContext();
 
-    const [errors, setErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
+    const [errors, setErrors] = useState({});
     const [values, setValues] = useState({
         username: '',
         street: '',
@@ -66,7 +66,7 @@ function Form() {
             errors.street = 'Please enter a valid street!';
         }
 
-        if (!postalCode || postalCode.length < 5) {
+        if (postalCode.length < 5 || postalCode.length > 5) {
             errors.postalCode = 'Please enter a valid postal code (5 character long)!';
         }
 
@@ -79,7 +79,6 @@ function Form() {
 
     useEffect(() => {
         if (Object.keys(errors).length === 0 && isSubmit) {
-            //call API
             submitData(values);
         }
     }, [errors]);
@@ -91,7 +90,7 @@ function Form() {
                     <Input key={input.id} {...input} value={values[input.name]} onChange={handleChange} errors={errors} />
                 ))}
             </div>
-            <div className="mt-4 flex h-10">
+            <div className="mt-6 flex h-10 justify-end">
                 <button
                     className="border border-orange-700 rounded w-1/2 text-orange-700 lg:w-1/5 lg:h-9"
                     onClick={closeForm}

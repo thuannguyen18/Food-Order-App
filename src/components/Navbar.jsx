@@ -16,7 +16,7 @@ function Navbar() {
                 >
                     <BsFillCartFill className="text-3xl lg:text-2xl" />
                     <p className="font-semibold text-base hidden lg:block lg:text-md">Your Cart</p>
-                    <span className="text-sm rounded-xl bg-orange-600 w-6 h-6 leading-40 bottom-2/4 left-2/4 lg:text-base lg:inset-0 lg:pr-px">
+                    <span className="text-sm rounded-xl bg-orange-600 w-6 leading-40 bottom-2/4 left-2/4 lg:text-base lg:inset-0 lg:pr-px">
                         {amount}
                     </span>
                 </button>

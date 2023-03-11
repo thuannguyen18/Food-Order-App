@@ -7,7 +7,7 @@ function FoodList() {
     const { meals } = useGlobalContext();
 
     return (
-        <div className="bg-white w-full p-4 mt-6 lg:rounded-lg lg:w-3/5">
+        <div className="lg:bg-white w-full p-4 mt-6 lg:rounded-lg lg:w-3/5">
             {meals.map((meal, index) => (
                 <Food key={index} {...meal} />
             ))}

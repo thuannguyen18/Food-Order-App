@@ -11,7 +11,7 @@ function CartEmpty() {
                 className="border rounded p-2 w-full bg-orange-700 text-white lg:rounded-md lg:w-32 mt-4"
                 onClick={closeModal}
             >
-                Order Now
+                Back To List
             </button>
         </div>
     );

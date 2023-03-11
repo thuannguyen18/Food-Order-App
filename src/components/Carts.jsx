@@ -19,7 +19,7 @@ function Carts() {
                 <p className="font-bold text-xl">${total}</p>
             </div>
             {!form &&
-                <div className="mt-6 flex h-10">
+                <div className="mt-6 flex h-10 justify-end">
                     <button
                         className="border border-orange-700 rounded w-1/2 text-orange-700 lg:w-1/5 lg:h-9"
                         onClick={closeModal}
