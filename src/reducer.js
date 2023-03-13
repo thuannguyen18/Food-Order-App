@@ -1,3 +1,15 @@
+const initState = {
+    meals: [],
+    carts: [],
+    loading: false,
+    submitting: false,
+    modal: false,
+    form: false,
+    alert: false,
+    total: 0,
+    amount: 0
+}
+
 function reducer(state, action) {
     switch (action.type) {
         case 'OPEN_MODAL':
@@ -12,11 +24,13 @@ function reducer(state, action) {
             return { ...state, loading: true };
         case 'DISPLAY_FOODS':
             return { ...state, loading: false, meals: action.payload };
+        case 'DISPLAY_ERROR':
+            return { ...state, loading: false };
         case 'ADD_CART':
             if (action.payload.count <= 0 || !Number.isInteger(action.payload.count)) return state;
             const newCarts = state.carts.reduce((tempCarts, cartItem) => {
                 if (cartItem.name === action.payload.name) {
-                    const newCartItem = {...action.payload, count: action.payload.count + cartItem.count };
+                    const newCartItem = { ...action.payload, count: action.payload.count + cartItem.count };
                     const newTempCarts = tempCarts.filter((cartItem) => cartItem.name !== action.payload.name);
                     return [...newTempCarts, newCartItem];
                 }
@@ -27,10 +41,8 @@ function reducer(state, action) {
             let { total, amount } = state.carts.reduce((cartTotal, cartItem) => {
                 const { price, count } = cartItem;
                 const total = price * count;
-
                 cartTotal.total += total;
                 cartTotal.amount += count;
-
                 return cartTotal;
             }, { total: 0, amount: 0 });
             total = parseFloat(total.toFixed(2));
@@ -67,4 +79,6 @@ function reducer(state, action) {
     };
 };
 
+
+export { initState };
 export default reducer;

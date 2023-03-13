@@ -1,5 +1,3 @@
-import React from "react";
-
 function Input({ id, label, value, errors, onChange, ...inputProps }) {
     return (
         <div className="mt-2">

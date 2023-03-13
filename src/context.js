@@ -1,20 +1,7 @@
-import { createContext, useContext, useState, useEffect, useReducer } from "react";
-
-import reducer from "./reducer";
+import { createContext, useContext, useEffect, useReducer } from "react";
+import reducer, { initState } from "./reducer";
 
 const AppContext = createContext();
-
-const initState = {
-    meals: [],
-    carts: [],
-    loading: false,
-    submitting: false,
-    modal: false,
-    form: false,
-    alert: false,
-    total: 0,
-    amount: 0
-}
 
 function AppProvider({ children }) {
     const [state, dispatch] = useReducer(reducer, initState);
@@ -24,7 +11,11 @@ function AppProvider({ children }) {
         try {
             const response = await fetch('https://625a91bf0ab4013f94a2d9a8.mockapi.io/meals');
             const data = await response.json();
-            dispatch({ type: 'DISPLAY_FOODS', payload: data });
+            if (Array.isArray(data)) {
+                dispatch({ type: 'DISPLAY_FOODS', payload: data });
+            } else {
+                dispatch({ type: 'DISPLAY_ERROR', payload: data });
+            }
         } catch (error) {
             console.log(error);
         }
@@ -32,6 +23,11 @@ function AppProvider({ children }) {
 
     const submitData = async (values) => {
         dispatch({ type: 'SUBMIT' });
+        const response = await fetch('https://625a91bf0ab4013f94a2d9a8.mockapi.io/orders/101', {
+            method: 'DELETE'
+        });
+        const data = await response.json();
+        console.log(data);
         try {
             const response = await fetch('https://625a91bf0ab4013f94a2d9a8.mockapi.io/orders', {
                 method: 'POST',
@@ -39,19 +35,15 @@ function AppProvider({ children }) {
                 body: JSON.stringify(values)
             });
             const data = await response.json();
+            console.log(data);
             dispatch({ type: 'END_SUBMIT' });
         } catch (error) {
             console.log(error);
         }
     }
 
-    const addToCart = (name, price, count) => {
-        const cartItem = {
-            id: new Date().getTime().toString(),
-            name,
-            price,
-            count: +count
-        };
+    const addToCart = (id, name, price, count) => {
+        const cartItem = { id, name, price, count: +count };
         dispatch({ type: 'ADD_CART', payload: cartItem });
     };
 
@@ -94,6 +86,7 @@ function AppProvider({ children }) {
                 addToCart,
                 increase,
                 decrease,
+                fetchMeals,
                 submitData,
                 openModal,
                 openForm,

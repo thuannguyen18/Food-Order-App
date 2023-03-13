@@ -1,6 +1,4 @@
-import React from 'react';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
-
 import { useGlobalContext } from '../context';
 
 function CartItem({ id, name, price, count }) {

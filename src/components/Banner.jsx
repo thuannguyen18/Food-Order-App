@@ -1,5 +1,3 @@
-import React from 'react';
-
 function Banner() {
     return (
         <div className="bg-neutral-700 text-white text-center w-11/12 px-2 py-4 rounded-lg lg:shadow-lg lg:shadow-zinc-900 mt-6 lg:mt-8 lg:rounded-lg lg:w-2/5 lg:p-4">

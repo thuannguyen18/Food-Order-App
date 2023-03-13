@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
 import Input from './Input';
 import { useGlobalContext } from '../context';
 

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Carts from './Carts';
 import CartEmpty from './CartEmpty';
 import Form from './Form';
@@ -13,9 +11,8 @@ function Modal() {
             <div className="bg-white p-5 lg:p-4 rounded-md w-5/6 lg:w-2/5">
                 {submitting ?
                     <div className="p-5">
-                        <p className="font-semibold">Sending order data...</p>
-                    </div>
-                    :
+                        <p className="font-semibold text-center">Sending order data...</p>
+                    </div>  :
                     <>
                         {carts.length > 0 && <Carts />}
                         {carts.length < 1 && <CartEmpty />}
