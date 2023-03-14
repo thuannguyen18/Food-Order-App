@@ -11,11 +11,7 @@ function AppProvider({ children }) {
         try {
             const response = await fetch('https://625a91bf0ab4013f94a2d9a8.mockapi.io/meals');
             const data = await response.json();
-            if (Array.isArray(data)) {
-                dispatch({ type: 'DISPLAY_FOODS', payload: data });
-            } else {
-                dispatch({ type: 'DISPLAY_ERROR', payload: data });
-            }
+            dispatch({ type: 'DISPLAY_FOODS', payload: data });
         } catch (error) {
             console.log(error);
         }

@@ -24,8 +24,6 @@ function reducer(state, action) {
             return { ...state, loading: true };
         case 'DISPLAY_FOODS':
             return { ...state, loading: false, meals: action.payload };
-        case 'DISPLAY_ERROR':
-            return { ...state, loading: false };
         case 'ADD_CART':
             if (action.payload.count <= 0 || !Number.isInteger(action.payload.count)) return state;
             const newCarts = state.carts.reduce((tempCarts, cartItem) => {
